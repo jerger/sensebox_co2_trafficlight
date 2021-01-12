@@ -1,4 +1,4 @@
-#CO2 Traffic-Ligth for sensebox-co2-ample set
+# CO2 Traffic-Ligth for sensebox-co2-ample set
 
 Enhanced CO2 traffic light showing a diagram for last 2h for CO2, temp & humidity measurements.
 
