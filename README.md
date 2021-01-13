@@ -4,5 +4,18 @@ Enhanced CO2 traffic light showing a diagram for last 2h for CO2, temp & humidit
 
 ![doc/co2_log.jpg](doc/co2_log.jpg)
 
-* accelSwitch: Switches diagram if you acclerate in Z-direction
-* timedSwitch: Switches every 2 min
+* gyroSwitch: 
+    * Switches main measurement if you rotate around Z-axis
+    * Shows all mesaurements in dottet diagram with different colors
+    * State: gyroswitch and dottet diagram requires some more debugging.
+* accelSwitch: 
+    * Switches diagram if you acclerate in Z-direction
+    * Shows selected mesaurements as filled diagram
+    * State: delay ist not the best idea while expecting user input. needs some better idea.
+* timedSwitch: 
+    * Switches diagram every 2 min
+    * Ahows selected mesaurements as filled diagram
+    * State: works fine :-)
+
+## compile
+use a `ln -s ../lib/src/* .` in your sketch dir in front of compilation.
