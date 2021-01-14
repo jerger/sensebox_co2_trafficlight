@@ -39,6 +39,7 @@ void loop()
 {
   unsigned long t = millis();
   String hour = String(t / 3600000.0);
+  String minute = String(t / 60000.0);
 
   if (t > lastMeasurementTime + 20000)
   {
@@ -55,5 +56,5 @@ void loop()
   }
 
   led.showMeasurement(co2);
-  display.printOneFilled(*logs[mode], hour);
+  display.printManyDotted(logs, mode, 3, minute);
 }

@@ -10,7 +10,7 @@
 
 class LoggedMeasurement
 {
-    const unsigned long logRate = 60000;
+    const unsigned long logRate = 6000;
     double offset;
     double scale;
     double calibration;
@@ -40,7 +40,7 @@ public:
     LogDispaly();
     void init();
     void printOneFilled(LoggedMeasurement measurement, String debug);
-    void printManyDotted(LoggedMeasurement logs[], int mainLog, String debug);
+    void printManyDotted(LoggedMeasurement *logs[], int mainLog, int logsSize, String debug);
 };
 
 class LogTrafficLight : Adafruit_NeoPixel

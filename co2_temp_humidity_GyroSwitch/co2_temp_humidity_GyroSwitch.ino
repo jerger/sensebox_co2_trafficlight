@@ -14,11 +14,11 @@ LoggedMeasurement *logs[] = {&co2, &temp, &humidity};
 LogDispaly display;
 SCD30 airSensor;
 //DebouncedGyroSwitch aSwitch;
+BMX055 bSwitch;
 LogTrafficLight led = LogTrafficLight(1000.0, 1500.0);
 
 unsigned long lastMeasurementTime;
 int mainLog;
-boolean isInitialRun = true;
 
 void setup()
 {
@@ -40,19 +40,13 @@ void loop()
 {
   unsigned long t = millis();
   String hour = String(t / 3600000.0);
-
-  if (isInitialRun || t > lastMeasurementTime + 10000)
+  String minute = String(t / 60000.0);
   {
-    isInitialRun = false;
     lastMeasurementTime = t;
 
     co2.addMeasurement(float(airSensor.getCO2()), t);
     temp.addMeasurement(airSensor.getTemperature(), t);
     humidity.addMeasurement(airSensor.getHumidity(), t);
-
-    led.showMeasurement(co2);
-    display.printOneFilled(*logs[mainLog], hour);
-    //display.printManyDotted(*logs, mainLog, hour);
   }
 
   // if (aSwitch.isTriggered())
@@ -61,4 +55,10 @@ void loop()
   //   //display.printManyDotted(*logs, mainLog, "");
   //   display.printOneFilled(*logs[mainLog], hour);
   // }
+
+  led.showMeasurement(co2);
+  //display.printOneFilled(*logs[mainLog], String(aSwitch.isTriggered()));
+  Serial.println("start");
+  Serial.println(String(bSwitch.beginMagn()));
+  display.printOneFilled(*logs[mainLog], minute);
 }

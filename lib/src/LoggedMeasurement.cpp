@@ -36,7 +36,7 @@ void LogDispaly::init()
   delay(2000);
   begin(SSD1306_SWITCHCAPVCC, 0x3D);
   display();
-  delay(1000);
+  delay(500);
   clearDisplay();
 }
 
@@ -59,10 +59,12 @@ void LogDispaly::printLogFilled(LoggedMeasurement measurement, int color)
 
 void LogDispaly::printLogDotted(LoggedMeasurement measurement, int color)
 {
+  short y0 = 0;
   for (byte i = 0; i < LOG_MAX; i++)
   {
-    short y = 61 - int(measurement.measurementLog[i] * 48);
-    drawPixel(i + 3, y, color);
+    short y1 = 61 - int(measurement.measurementLog[i] * 48);
+    drawLine(i+2, y0, i + 3, y1, color);
+    y0 = y1;
   }
 }
 
@@ -83,7 +85,7 @@ void LogDispaly::printXAxis()
   // x-ticks: 6 * 21 = 126
   for (byte i = 0; i < 6; i++)
   {
-    int x = 23 + (i * 21);
+    int x = 2 + (i * 21);
     drawLine(x, 63, x, 64, 1);
   }
 }
@@ -98,15 +100,17 @@ void LogDispaly::printOneFilled(LoggedMeasurement measurement, String debug)
   display();
 }
 
-void LogDispaly::printManyDotted(LoggedMeasurement logs[], int mainLog, String debug)
+void LogDispaly::printManyDotted(LoggedMeasurement *logs[], int mainLog, int logsSize, String debug)
 {
   clearDisplay();
-  printMeasurement(logs[mainLog], debug);
+  printMeasurement(*logs[mainLog], debug);
   printYAxis();
   printXAxis();
-  printLogDotted(logs[mainLog], 2);
-  printLogDotted(logs[(mainLog + 1) % 3], 4);
-  printLogDotted(logs[(mainLog + 2) % 3], 6);
+  printLogDotted(*logs[mainLog], 2);
+  for (int i = 1; i < logsSize; i++)
+  {
+    printLogDotted(*logs[(mainLog + i) % logsSize], 2 + i*2);
+  }
   display();
 }
 
@@ -140,4 +144,3 @@ void LogTrafficLight::init()
   begin();
   setBrightness(100);
 }
-

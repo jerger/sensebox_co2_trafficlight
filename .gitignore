@@ -1,2 +1,8 @@
 libraries/
 *.bin
+co2_temp_humidity_accelSwitch/*.cpp
+co2_temp_humidity_accelSwitch/*.h
+co2_temp_humidity_GyroSwitch/*.cpp
+co2_temp_humidity_GyroSwitch/*.h
+co2_temp_humidity_timedSwitch/*.cpp
+co2_temp_humidity_timedSwitch/*.h
