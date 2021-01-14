@@ -5,8 +5,6 @@
 #include "SwitchAndTrigger.h"
 #include "LoggedMeasurement.h"
 
-int mode;
-
 // init globals
 LoggedMeasurement co2 = LoggedMeasurement("CO2", "ppm", 0.0, 500.0, 2000.0);
 LoggedMeasurement temp = LoggedMeasurement("Temp", "*C", -5.5, 15.0, 20.0);
@@ -17,6 +15,9 @@ LogDispaly display;
 SCD30 airSensor;
 DebouncedAccelerometerSwitch aSwitch;
 LogTrafficLight led = LogTrafficLight(1000.0, 1500.0);
+
+unsigned long lastMeasurementTime;
+int mode;
 
 void setup()
 {
@@ -37,9 +38,16 @@ void setup()
 void loop()
 {
   unsigned long t = millis();
-  co2.addMeasurement(float(airSensor.getCO2()), t);
-  temp.addMeasurement(airSensor.getTemperature(), t);
-  humidity.addMeasurement(airSensor.getHumidity(), t);
+  String hour = String(t / 3600000.0);
+
+  if (t > lastMeasurementTime + 20000)
+  {
+    lastMeasurementTime = t;
+    
+    co2.addMeasurement(float(airSensor.getCO2()), t);
+    temp.addMeasurement(airSensor.getTemperature(), t);
+    humidity.addMeasurement(airSensor.getHumidity(), t);
+  }
 
   if (aSwitch.isTriggered())
   {
@@ -47,6 +55,5 @@ void loop()
   }
 
   led.showMeasurement(co2);
-  display.printOneFilled(*logs[mode], String(t / 60000.0));
-  delay(100);;
+  display.printOneFilled(*logs[mode], hour);
 }

@@ -11,7 +11,7 @@ Enhanced CO2 traffic light showing a diagram for last 2h for CO2, temp & humidit
 * accelSwitch: 
     * Switches diagram if you acclerate in Z-direction
     * Shows selected mesaurements as filled diagram
-    * State: delay ist not the best idea while expecting user input. needs some better idea.
+    * State: works fine, but maybe any direction would be better than only Z :-)
 * timedSwitch: 
     * Switches diagram every 2 min
     * Ahows selected mesaurements as filled diagram
