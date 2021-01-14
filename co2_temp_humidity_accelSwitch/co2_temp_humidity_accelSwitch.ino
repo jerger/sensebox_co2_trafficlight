@@ -56,5 +56,5 @@ void loop()
   }
 
   led.showMeasurement(co2);
-  display.printManyDotted(logs, mode, 3, minute);
+  display.printManyDotted(logs, mode, 3, hour);
 }

@@ -10,7 +10,7 @@
 
 class LoggedMeasurement
 {
-    const unsigned long logRate = 6000;
+    const unsigned long logRate = 60000;
     double offset;
     double scale;
     double calibration;
