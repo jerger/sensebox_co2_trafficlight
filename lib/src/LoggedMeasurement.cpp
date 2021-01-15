@@ -59,13 +59,19 @@ void LogDispaly::printLogFilled(LoggedMeasurement measurement, int color)
 
 void LogDispaly::printLogDotted(LoggedMeasurement measurement, int color)
 {
-  short y0 = 0;
+  short y0 = 61;
+  Serial.print(measurement.name + ": ");
   for (byte i = 0; i < LOG_MAX; i++)
   {
     short y1 = 61 - int(measurement.measurementLog[i] * 48);
-    drawLine(i+2, y0, i + 3, y1, color);
+    if (y0 != 61 && y1 != 61)
+    {
+      Serial.print("(" + String(i + 2) + "," + y0 + "," + String(i + 3) + "," + y1 + ") ");
+      drawLine(i + 2, y0, i + 3, y1, color);
+    }
     y0 = y1;
   }
+  Serial.println();
 }
 
 void LogDispaly::printYAxis()
@@ -106,11 +112,11 @@ void LogDispaly::printManyDotted(LoggedMeasurement *logs[], int mainLog, int log
   printMeasurement(*logs[mainLog], debug);
   printYAxis();
   printXAxis();
-  printLogDotted(*logs[mainLog], 2);
   for (int i = 1; i < logsSize; i++)
   {
-    printLogDotted(*logs[(mainLog + i) % logsSize], 2 + i*2);
+    printLogDotted(*logs[(mainLog + i) % logsSize], 1);
   }
+  printLogFilled(*logs[mainLog], 2);
   display();
 }
 

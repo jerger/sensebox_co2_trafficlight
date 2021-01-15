@@ -18,6 +18,7 @@ LogTrafficLight led = LogTrafficLight(1000.0, 1500.0);
 
 unsigned long lastMeasurementTime;
 int mode;
+boolean initial = true;
 
 void setup()
 {
@@ -41,20 +42,23 @@ void loop()
   String hour = String(t / 3600000.0);
   String minute = String(t / 60000.0);
 
-  if (t > lastMeasurementTime + 20000)
+  if (t > lastMeasurementTime + 30000 || initial)
   {
     lastMeasurementTime = t;
+    initial = false;
     
     co2.addMeasurement(float(airSensor.getCO2()), t);
     temp.addMeasurement(airSensor.getTemperature(), t);
     humidity.addMeasurement(airSensor.getHumidity(), t);
+    led.showMeasurement(co2);
+    display.printManyDotted(logs, mode, 3, hour);
+    //display.printOneFilled(*logs[mode], hour);
   }
 
   if (aSwitch.isTriggered())
   {
     mode = (mode + 1) % 3;
-  }
-
-  led.showMeasurement(co2);
-  display.printManyDotted(logs, mode, 3, hour);
+    display.printManyDotted(logs, mode, 3, hour);
+    //display.printOneFilled(*logs[mode], hour);
+  }  
 }
