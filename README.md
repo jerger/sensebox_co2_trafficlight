@@ -7,11 +7,11 @@ Enhanced CO2 traffic light showing a diagram for last 2h for CO2, temp & humidit
 * gyroSwitch: 
     * Switches main measurement if you rotate around Z-axis
     * Shows all mesaurements in dottet diagram with different colors
-    * State: mcu's gyro switch is not working atmo.
+    * State: mcu's gyro switch implementation is not working atmo.
 * accelSwitch: 
-    * Switches main measurement if you acclerate in Z-direction
-    * Shows all mesaurements in dottet diagram with different colors
-    * State: works fine, but maybe any direction would be better than only Z :-)
+    * Switches main measurement if you acclerate in any-direction (only one switch event per 10 sec)
+    * Shows the main mesaurements filled, others as line diagram.
+    * State: works fine.
 * timedSwitch: 
     * Switches diagram every 2 min
     * Ahows selected mesaurements as filled diagram
