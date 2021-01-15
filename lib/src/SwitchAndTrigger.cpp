@@ -22,7 +22,7 @@ boolean DebouncedGyroSwitch::isTriggered()
 void DebouncedAccelerometerSwitch::init()
 {
     beginAcc(ACCEL_2G);
-    normal = getAccelerationZ();
+    normal = getAccelerationTotal();
 }
 
 boolean DebouncedAccelerometerSwitch::isTriggered()
@@ -32,7 +32,7 @@ boolean DebouncedAccelerometerSwitch::isTriggered()
     if (t > cooldown + lastSwitchTime)
     {
         lastSwitchTime = t;
-        result = getAccelerationZ() > normal + 0.2;
+        result = getAccelerationTotal() > normal + 0.2;
     }
     return result;
 }

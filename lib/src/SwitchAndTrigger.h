@@ -8,7 +8,7 @@
 
 class DebouncedGyroSwitch : BMX055
 {
-    const unsigned long cooldown = 1000;
+    const unsigned long cooldown = 10000;
     double normal;
     unsigned long lastSwitchTime;
 
