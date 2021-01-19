@@ -2,7 +2,7 @@
 
 Enhanced CO2 traffic light showing a diagram for last 2h for CO2, temp & humidity measurements.
 
-![doc/co2_log.jpg](doc/co2_log.jpg) ![doc/co2_multilog.jpg](doc/co2_multilog.jpg)
+![doc/co2_log.jpg](doc/co2_log.jpg) ![doc/co2_multi_log.jpg](doc/co2_multi_log.jpg)
 
 
 * gyroSwitch: 
